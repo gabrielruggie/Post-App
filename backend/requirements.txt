@@ -6,3 +6,5 @@ uvicorn==0.17.6
 mysql-connector-python
 dotenv
 passlib==1.7.4
+mysql-connector-python==8.0.29 
+protobuf==4.21.2

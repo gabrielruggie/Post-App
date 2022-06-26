@@ -1,7 +1,9 @@
+from urllib import response
 import uuid
 from fastapi import APIRouter, Request, responses, status
-from schemas.user_schema import FormUser, DatabaseUser
+from schemas.user_schema import FormUser, DatabaseUser, User
 from security.password_hasher import PasswordHasher as PH
+from database.mysql_connectors import MySQLConnectors
 
 
 register = APIRouter()
@@ -20,7 +22,7 @@ def regsiter_user (new_user: FormUser):
         email=new_user.email
         )
         
-    PH.send_to_user_table(insert_user)
+    MySQLConnectors.send_to_user_table(insert_user)
 
     # Send user to login page to login and create web token
     return responses.RedirectResponse("/", status_code=status.HTTP_302_FOUND)

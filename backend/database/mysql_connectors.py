@@ -1,4 +1,4 @@
-import mysql_connectors
+import mysql.connector
 from schemas.user_schema import DatabaseUser
 from .settings import settings
 
