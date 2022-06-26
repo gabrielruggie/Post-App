@@ -1,4 +1,3 @@
-from urllib import response
 import uuid
 from fastapi import APIRouter, Request, responses, status
 from schemas.user_schema import FormUser, DatabaseUser, User
@@ -7,6 +6,7 @@ from database.mysql_connectors import MySQLConnectors
 
 
 register = APIRouter()
+
 
 @register.post("/")
 def regsiter_user (new_user: FormUser):
