@@ -8,6 +8,7 @@ from database.mysql_connectors import MySQLConnectors
 
 register = APIRouter()
 
+
 @register.post("/")
 def regsiter_user (new_user: FormUser):
     
