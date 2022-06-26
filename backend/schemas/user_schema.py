@@ -2,8 +2,8 @@ from lib2to3.pytree import Base
 from pydantic import BaseModel
 
 class User(BaseModel): 
-    id: str
     username: str 
+    password: str 
 
 class FormUser(BaseModel):
     firstname: str 
