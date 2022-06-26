@@ -1,6 +1,4 @@
-from ntpath import join
 import os
-from posixpath import dirname
 from dotenv import load_dotenv
 from pathlib import Path
 
