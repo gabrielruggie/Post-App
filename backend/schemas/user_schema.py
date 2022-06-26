@@ -1,9 +1,14 @@
-from lib2to3.pytree import Base
 from pydantic import BaseModel
 
+
 class User(BaseModel): 
-    username: str 
-    password: str 
+    username: str
+    password: str
+
+class UserPayload(BaseModel):
+    id: str 
+    firstname: str 
+    username: str
 
 class FormUser(BaseModel):
     firstname: str 

@@ -1,6 +1,6 @@
 from select import select
 import mysql.connector
-from schemas.user_schema import DatabaseUser, User
+from schemas.user_schema import DatabaseUser
 from .settings import settings
 
 class MySQLConnectors:
@@ -48,8 +48,12 @@ class MySQLConnectors:
 
             select_user = None
             for column in resource:
-                select_user = User(
+                select_user = DatabaseUser(
+                        id=column[0],
+                        firstname=column[1],
+                        lastname=column[2],
                         username=column[3],
+                        email=column[4],
                         password=column[5]
                     )
 
