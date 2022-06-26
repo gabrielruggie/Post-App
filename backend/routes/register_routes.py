@@ -7,7 +7,7 @@ from security.password_hasher import PasswordHasher as PH
 register = APIRouter()
 
 @register.post("/")
-def regsiter_user (request: Request, new_user: FormUser):
+def regsiter_user (new_user: FormUser):
     
     unique_id = str(uuid.uuid4())
 
