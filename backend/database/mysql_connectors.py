@@ -1,5 +1,6 @@
 import mysql_connectors
 from schemas.user_schema import DatabaseUser
+from .settings import settings
 
 class MySQLConnectors:
 

@@ -1,7 +1,7 @@
-from msilib import UuidCreate
+from urllib import response
 import uuid
-from fastapi import APIRouter, Request
-from schemas.user_schema import FormUser, DatabaseUser, User
+from fastapi import APIRouter, Request, responses, status
+from schemas.user_schema import FormUser, DatabaseUser
 from security.password_hasher import PasswordHasher as PH
 
 
@@ -23,7 +23,8 @@ def regsiter_user (request: Request, new_user: FormUser):
         
     PH.send_to_user_table(insert_user)
 
-    return User(id=unique_id, username=new_user.username)
+    # Send user to login page to login and create web token
+    return responses.RedirectResponse("/", status_code=status.HTTP_302_FOUND)
 
 
 
