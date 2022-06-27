@@ -1,6 +1,6 @@
-from select import select
 import mysql.connector
 from schemas.user_schema import DatabaseUser
+from schemas.post_schemas import DatabasePost
 from .settings import settings
 
 class MySQLConnectors:
@@ -71,4 +71,102 @@ class MySQLConnectors:
                 cursor.close()
                 connection.close()
 
+    @staticmethod
+    def retrieve_all_posts ():
+        try:
+            # Sets up MySQL connector
+            connection = mysql.connector.connect(host=settings.MYSQL_HOST, database=settings.MYSQL_DATABASE,
+            user=settings.MYSQL_USER, password=settings.MYSQL_PASSWORD)
+
+            cursor = connection.cursor() 
+            # MySQL selection query
+            select_query = """SELECT * FROM posttable WHERE live = 1"""
+            # Has to be a tuple in order to query
+            cursor.execute(select_query)
+            resources = cursor.fetchall()
+
+            all_posts = {}
+            for column in resources:
+                content = {
+                    "title":column[1],
+                    "message":column[2],
+                    "date_posted":column[3]
+                }
+
+                all_posts.update({column[0]:content})
+
+            # Create nested dict to easily convert to json later
+            return all_posts
+
+        except mysql.connector.Error as e:
+            print(f"Failed to select resource from database. Stopped by {e}")
+
+        finally:
+            # Closes connection after insertion is complete
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+    
+    @staticmethod
+    def retrieve_post_by_id (id):
+        try:
+            # Sets up MySQL connector
+            connection = mysql.connector.connect(host=settings.MYSQL_HOST, database=settings.MYSQL_DATABASE,
+            user=settings.MYSQL_USER, password=settings.MYSQL_PASSWORD)
+
+            cursor = connection.cursor() 
+            # MySQL selection query
+            select_query = """SELECT * FROM posttable WHERE id = %s"""
+            # Has to be a tuple in order to query
+            cursor.execute(select_query, (id,))
+            resource = cursor.fetchall()
+
+            post = {}
+            for column in resource:
+                content = {
+                    "title":column[1],
+                    "message":column[2],
+                    "date_posted":column[3]
+                }
+
+                post.update({column[0]:content})
+
+            # Create nested dict to easily convert to json later
+            return post
+
+        except mysql.connector.Error as e:
+            print(f"Failed to select resource from database. Stopped by {e}")
+
+        finally:
+            # Closes connection after insertion is complete
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+    
+    @staticmethod
+    def send_post_to_posttable (post: DatabasePost):
+        try:
+            # Sets up MySQL connector
+            connection = mysql.connector.connect(host=settings.MYSQL_HOST, database=settings.MYSQL_DATABASE,
+            user=settings.MYSQL_USER, password=settings.MYSQL_PASSWORD)
+
+            # Sets up MySQL pointer to add to datbase
+            cursor = connection.cursor()
+            query = """INSERT INTO posttable (id, title, message, date_posted, poster_id, live)
+                                VALUES (%s, %s, %s, %s, %s, %s);"""
+
+            # Adds user data to database
+            record = (post.id, post.title, post.message, post.date_posted, post.poster_id, post.live)
+            cursor.execute(query, record)
+
+            connection.commit()
+
+        except mysql.connector.Error as e:
+            print(f"Failed to add resource to data base. Stopped by: {e}")
+
+        finally:
+            # Closes connection after insertion is complete
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
     
