@@ -1,4 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -6,17 +8,33 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [successfulRegistration, setRegistrationSuccess] = useState(false);
 
-  function handleSubmission (event) {
-    event.preventDefault();
+  const nav = useNavigate();
 
-    // Check fields here
+  useEffect(() => {
+    if (successfulRegistration){
+      console.log("can you see me?")
+    }
+  });
 
+  const handleSubmission = async () => {
+    axios.post('http://localhost:8000/register', {
+      'firstname': firstName,
+      'lastname': lastName,
+      'username': username,
+      'password': password,
+      'email': email
+    }).then(result => {
+      console.log(result)
+    });
+    
+    
   }
 
   return (
     <div className='grid justify-center text-center my-20'>
-      <h1>Register</h1>
+      <h1 className='text-7xl font-bold font-mono text-yellow-400'>Register</h1>
       <form className='my-20 space-y-10' onSubmit={handleSubmission}>
         
         <div>
@@ -74,7 +92,9 @@ export default function Register() {
           />
         </div>
 
-      <button>Submit</button>
+      <button className='font-mono text-4xl text-yellow-400 font-bold '>Submit</button>
+
+      <div><Link className='font-mono text-2xl text-yellow-400 font-bold' to="/">Back to Home Page</Link></div>
 
       </form>
     </div>

@@ -9,7 +9,7 @@ register = APIRouter()
 
 
 @register.post("/")
-def regsiter_user (new_user: FormUser):
+async def regsiter_user (new_user: FormUser):
     
     unique_id = str(uuid.uuid4())
 
@@ -25,7 +25,7 @@ def regsiter_user (new_user: FormUser):
     MySQLConnectors.send_to_user_table(insert_user)
 
     # Send user to login page to login and create web token
-    return responses.RedirectResponse("/", status_code=status.HTTP_302_FOUND)
+    return responses.JSONResponse({"Registration": "Successful"})
 
 
 
