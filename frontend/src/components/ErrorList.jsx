@@ -1,14 +1,12 @@
 import React from 'react'
+import Error from './Error'
 
 // Future Task => Add id to each error
 // Probably smart to make an Error Component
-export default function Error({errors}) {
-    const errorList = errors.map(
-        error => <li>{error}</li>
-    );
+export default function ErrorList({errors}) {
     return (
-        <ul>
-            {errorList}
-        </ul>
+        errors.map(
+            error => <Error error={error} />
+        )
     )
 }

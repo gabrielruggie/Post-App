@@ -23,13 +23,13 @@ class UserVerification:
     def check_user_registration_input (cls, user: FormUser):
         errors = []
         if not len(user.username) >= 5:
-            errors.append({"INVALID USERNAME":"username is not long enough"})
+            errors.append({"INVALID USERNAME":"Username Must Be At Least 8 Characters"})
         
         if not cls.check_email(user.email):
-            errors.append({"INVALID EMAIL":"email is not a valid email"})
+            errors.append({"INVALID EMAIL":"Invalid Email"})
         
         if not cls.check_password(user.password) and not len(user.password) >= 8:
-            errors.append({"INVALID PASSWORD":"password must contain at least one uppercase letter and number"})
+            errors.append({"INVALID PASSWORD":"Password Must Contain An Uppercase Letter And A Number"})
 
         if len(errors) > 0:
             failed_payload = {"result":"Failed to Register User"}

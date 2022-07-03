@@ -38,10 +38,12 @@ export default function Register() {
 
   }
 
+  // Add 3D text to registration
   return (
     <div className='grid justify-center text-center my-20'>
-      <h1 className='text-7xl font-bold font-mono text-yellow-400'>Register</h1>
-      <form className='my-20 space-y-10' onSubmit={handleSubmission}>
+      <h1 className='text-7xl font-bold font-mono text-yellow-400 pb-10'>Registration</h1>
+      <ErrorList errors={errors} />
+      <form className='my-10 space-y-9' onSubmit={handleSubmission}>
         
         <div>
           <label className='font-mono text-2xl text-yellow-400 font-bold' htmlFor="firstName">Enter Your First Name</label>
@@ -97,8 +99,6 @@ export default function Register() {
             className="w-full rounded-md text-2xl font-mono"
           />
         </div>
-
-      <ErrorList errors={errors} />
 
       <button 
       className={isDisabled ? 'font-mono text-4xl text-black font-bold': 'font-mono text-4xl text-yellow-400 font-bold'} 
