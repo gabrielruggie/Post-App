@@ -1,5 +1,5 @@
 from security.password_hasher import PasswordHasher as PH
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from schemas.user_schema import FormUser
 import re
 
