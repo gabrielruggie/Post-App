@@ -11,14 +11,13 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([])
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const nav = useNavigate();
-
-  // Add freeze to screen when button is clicked
-  // Config css --> display
   async function handleSubmission(event){
     event.preventDefault();
 
+    setIsDisabled(true);
     await axios.post('http://localhost:8000/register', {
       'firstname': firstName,
       'lastname': lastName,
@@ -27,11 +26,16 @@ export default function Register() {
       'email': email
     }).then(
       result => {   
-        if (result.data["result"] === "User Registered"){nav(result.data["redirect"])}
-        setErrors(Object.values(result.data))
+        if (result.data["result"] === "User Registered"){
+          nav(result.data["redirect"]);
+        }
+        setIsDisabled(false);
+        setErrors(Object.values(result.data));
+
       }
     )
     .catch(err => console.log(err));
+
   }
 
   return (
@@ -96,7 +100,12 @@ export default function Register() {
 
       <ErrorList errors={errors} />
 
-      <button className='font-mono text-4xl text-yellow-400 font-bold '>Submit</button>
+      <button 
+      className={isDisabled ? 'font-mono text-4xl text-black font-bold': 'font-mono text-4xl text-yellow-400 font-bold'} 
+      disabled={isDisabled}
+      >
+        Submit
+      </button>
 
       <div><Link className='font-mono text-2xl text-yellow-400 font-bold' to="/">Back to Home Page</Link></div>
 
