@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Redirect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -8,28 +9,26 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [successfulRegistration, setRegistrationSuccess] = useState(false);
 
   const nav = useNavigate();
 
-  useEffect(() => {
-    if (successfulRegistration){
-      console.log("can you see me?")
-    }
-  });
+  // Add freeze to screen when button is clicked
+  // Config css --> display
+  async function handleSubmission(event){
+    event.preventDefault();
 
-  const handleSubmission = async () => {
-    axios.post('http://localhost:8000/register', {
+    await axios.post('http://localhost:8000/register', {
       'firstname': firstName,
       'lastname': lastName,
       'username': username,
       'password': password,
       'email': email
-    }).then(result => {
-      console.log(result)
-    });
-    
-    
+    }).then(
+      result => {
+        nav(result.data["redirect"])
+      }
+    )
+    .catch(err => console.log(err));
   }
 
   return (
