@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import ErrorList from '../components/ErrorList'
 
 
 export default function Register() {
@@ -9,6 +10,7 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([])
 
   const nav = useNavigate();
 
@@ -24,8 +26,9 @@ export default function Register() {
       'password': password,
       'email': email
     }).then(
-      result => {
-        nav(result.data["redirect"])
+      result => {   
+        if (result.data["result"] === "User Registered"){nav(result.data["redirect"])}
+        setErrors(Object.values(result.data))
       }
     )
     .catch(err => console.log(err));
@@ -90,6 +93,8 @@ export default function Register() {
             className="w-full rounded-md text-2xl font-mono"
           />
         </div>
+
+      <ErrorList errors={errors} />
 
       <button className='font-mono text-4xl text-yellow-400 font-bold '>Submit</button>
 
