@@ -7,22 +7,17 @@ from routes.dashboard_routes import dashboard
 from routes.login_routes import login
 from routes.about_us_routes import about
 
-origins =[
-    'http://localhost:3000'
-]
+origins =['http://localhost:3000']
 
-def define_router (app):
-    app.include_router(home, prefix="")
-    app.include_router(register, prefix="/register")
-    app.include_router(dashboard, prefix="/dashboard")
-    app.include_router(login, prefix="/login")
-    app.include_router(about, prefix="/about-us")
-
-def mount_router ():
-
+def setup ():
     app = FastAPI()
-    define_router(app)
-    
+
+    app.include_router(home, prefix="")
+    app.include_router(register, prefix="/register", tags=["register"])
+    app.include_router(dashboard, prefix="/dashboard", tags=["dashboard"])
+    app.include_router(login, prefix="/login", tags=["login"])
+    app.include_router(about, prefix="/about-us", tags=["about-us"])
+
     # Allowing communication between frontend and backend
     app.add_middleware(
         CORSMiddleware,
@@ -32,6 +27,6 @@ def mount_router ():
         allow_headers=["*"],
     )
 
-    return app 
+    return app    
 
-app = mount_router()
+app = setup()
