@@ -25,7 +25,6 @@ async def regsiter_user (new_user: FormUser):
     MySQLConnectors.send_to_user_table(insert_user)
 
     # Send user to login page to login and create web token
-    # return responses.RedirectResponse("/")
     return responses.JSONResponse({"redirect":"/"})
 
 
