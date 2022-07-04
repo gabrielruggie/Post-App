@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 
 function App() {
 
-  function changeBackgroundColor () {
-    document.querySelector('body').style.backgroundColor = "black";
-  }
-
   return (
     <div className="App w-full">
       <div className='text-center text-8xl font-bold font-mono text-yellow-500 pt-20 my-10'>POST APP</div>
