@@ -14,10 +14,21 @@ class UserVerification:
     def verify_user_credentials (user, password):
         # If MySQL couldn't find the username in database, then ...
         if user == None:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"{u}")
+            return {
+                "result":"Failed to Verify User", 
+                "INVALID USERNAME":"Username Could Not Be Verified"
+                }
 
         if not PH.verify(password, user.password):
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"{u}")
+            return {
+                "result":"Failed to Verify User",
+                "INVALID PASSWORD":"Password Is Invalid"
+                }
+        
+        return {
+            "result":"User Verified",
+            "redirect":"/dashboard"
+            }
 
     @classmethod
     def check_user_registration_input (cls, user: FormUser):
@@ -38,7 +49,10 @@ class UserVerification:
             
             return failed_payload
         
-        return {"result":"Successful Registration"}
+        return {
+            "result":"User Registered",
+            "redirect":"/login"
+            }
 
     @classmethod
     def check_email (cls, initial_email):

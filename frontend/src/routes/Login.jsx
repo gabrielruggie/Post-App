@@ -15,12 +15,12 @@ export default function Login() {
     event.preventDefault();
 
     setIsDisabled(true);
-    await axios.post('http://localhost:8000/register', {
+    await axios.post('http://localhost:8000/login', {
       'username': username,
       'password': password
     }).then(
       result => {   
-        if (result.data["result"] === "User Registered"){
+        if (result.data["result"] === "User Verified"){
           nav(result.data["redirect"]);
         }
         setIsDisabled(false);

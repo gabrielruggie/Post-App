@@ -4,10 +4,8 @@ from schemas.user_schema import FormUser, DatabaseUser
 from security.password_hasher import PasswordHasher as PH
 from database.mysql_connectors import MySQLConnectors
 from security.user_verification import UserVerification, RegistrationError
-import json
 
 register = APIRouter()
-
 
 @register.post("/")
 async def regsiter_user (new_user: FormUser):
@@ -31,7 +29,7 @@ async def regsiter_user (new_user: FormUser):
     MySQLConnectors.send_to_user_table(insert_user)
 
     # Send user to login page to login and create web token
-    return responses.JSONResponse({"result":"User Registered","redirect":"/"})
+    return responses.JSONResponse(registration_payload)
 
 
 
