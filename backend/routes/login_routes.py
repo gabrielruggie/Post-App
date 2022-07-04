@@ -18,7 +18,6 @@ async def user_login (user: User):
         verification_payload = UV.verify_user_credentials(user_found, user.password)
 
         if verification_payload["result"] == "Failed to Verify User":
-            print(verification_payload)
             return responses.JSONResponse(verification_payload)
 
         # Redirect to homepage for now
