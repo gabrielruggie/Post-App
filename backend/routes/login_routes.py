@@ -1,4 +1,4 @@
-from fastapi import APIRouter, responses, status, HTTPException
+from fastapi import APIRouter, responses, HTTPException
 from schemas.user_schema import User
 from database.mysql_connectors import MySQLConnectors
 from security.user_verification import UserVerification as UV
@@ -15,12 +15,16 @@ async def user_login (user: User):
 
     try:
         # Verifies that data matches data in database
-        UV.verify_user_credentials(user_found, user.password)
+        verification_payload = UV.verify_user_credentials(user_found, user.password)
 
-        response = responses.RedirectResponse("/dashboard", status_code=status.HTTP_302_FOUND)
+        if verification_payload["result"] == "Failed to Verify User":
+            return responses.JSONResponse(verification_payload)
 
-        create_token_off_login(response=response, user_data=user_found)
+        # Redirect to homepage for now
+        response = responses.JSONResponse(verification_payload)
 
+        token = create_token_off_login(response=response, user_data=user_found)
+        print(token)
         return response
     
     except HTTPException as e:
