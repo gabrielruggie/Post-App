@@ -4,30 +4,30 @@ import { Link } from "react-router-dom";
 // If you want to change the background color maybe write a function that will change it in App.css
 export default function About() {
 
-  useEffect(
-        () => {
-            document.querySelector('body').style.backgroundColor = "#F2AB39";
-        }
-    )
+  // useEffect(
+  //       () => {
+  //           document.querySelector('body').style.backgroundColor = "#F2AB39";
+  //       }
+  //   )
 
   return (
     <div className="grid grid-cols-1 gap-3 m-5">
       <div 
-      className='text-center font-mono font-bold text-6xl text-rose-400 bg-yellow-400 rounded-md p-7'
+      className='text-center font-mono font-bold text-6xl text-blue-900 bg-yellow-500 rounded-md p-7'
       >
         POST APP
       </div>
       
       <div
-       className='text-center font-mono font-bold text-3xl text-rose-400 bg-yellow-400 rounded-md p-7 space-x-32'
+       className='text-center font-mono font-bold text-3xl text-blue-900 bg-yellow-500 rounded-md p-7 space-x-32'
       >
         <span><Link to="/">Home Page</Link></span>
-        <span><Link to="/">Register Today</Link></span>
-        <span><Link to="/">Login</Link></span>
+        <span><Link to="/register">Register Today</Link></span>
+        <span><Link to="/login">Login</Link></span>
       </div>
       
       <div
-      className='text-center font-mono font-bold p-10 bg-yellow-400 rounded-md text-rose-400 space-y-10'
+      className='text-center font-mono font-bold p-10 bg-yellow-500 rounded-md text-blue-900 space-y-10'
       >
         <span className='text-4xl'>So... What is it?</span>
         <p className='text-left text-xl ml-10 mr-10'>Post App is a user-based social media app that encourages all users to 
@@ -38,8 +38,8 @@ export default function About() {
       </div>
 
       <div
-      className='font-mono font-bold p-10 ml-10 mr-10 bg-yellow-700 rounded-md text-amber-300 space-y-6
-      hover:bg-yellow-800'
+      className='font-mono font-bold p-10 ml-10 mr-10 bg-slate-800 rounded-md text-amber-400 space-y-6
+      hover:bg-slate-900'
       >
         <span className='text-4xl ml-10 mr-10'>Youth Ministry Basketball League Open Gym's Coming Soon</span>
         <p className='text-xl ml-10 mr-10'>Stay tuned and watch our website for updates. We are cooking up something big!</p>
@@ -47,20 +47,20 @@ export default function About() {
       </div>
 
       <div
-      className='font-mono font-bold p-10 ml-10 mr-10 bg-yellow-700 rounded-md text-amber-300 space-y-6
-      hover:bg-yellow-800'
+      className='font-mono font-bold p-10 ml-10 mr-10 bg-slate-800 rounded-md text-amber-400 space-y-6
+      hover:bg-slate-900'
       >
         <span className='text-4xl ml-10 mr-10'>How bout that uzi concert!?!</span>
         <div className='text-slate-200 italic ml-10'>by: userEFG, August 26th, 2021 @1:00pm</div>
       </div>
 
       <div
-      className='text-center font-mono font-bold p-10 bg-yellow-400 rounded-md text-rose-400'
+      className='text-center font-mono font-bold p-10 bg-yellow-500 rounded-md text-blue-900'
       >
-        Closing Remarks
+        Newest Updates
       </div>
       <div
-      className='text-center first font-mono font-bold p-10 bg-rose-400 rounded-md text-yellow-300'
+      className='text-center first font-mono font-bold p-10 bg-slate-800 rounded-md text-yellow-300'
       >
         Footer
       </div>
