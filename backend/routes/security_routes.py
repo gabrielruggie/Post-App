@@ -1,6 +1,7 @@
 from datetime import datetime,timedelta
 from jose import JWTError, jwt
 from fastapi import Depends, status, HTTPException, APIRouter, Response
+from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from datetime import timedelta
 from typing import Optional
 from schemas.user_schema import UserPayload, User
@@ -30,17 +31,17 @@ def create_token (data: dict(), expires: Optional[timedelta] = None):
     return security_token
 
 @security.post("/token")
-def create_token_off_login (response: Response, user_data: User):
+def create_token_off_login (response: Response, user_data: OAuth2PasswordRequestForm = Depends()):
     # Defines token expiration timer
     token_expiration_time = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     # Creates access token
     token = create_token(data={"load":user_data.username}, expires=token_expiration_time)
     # Set response to HTTP Cookies
-    response.set_cookie(key="access_token", value=f"Bearer {token}", httponly=True)
-
+    # response.set_cookie(key="access_token", value=f"Bearer {token}", httponly=True)
+    print(token)
     return {"access_token": token, "token_type": "bearer"}
 
-OAuth2Scheme =  OAuth2PasswordBearerWithCookie(tokenUrl="/login/token")
+OAuth2Scheme =  OAuth2PasswordBearer(tokenUrl="/login/token")
 
 # This acts as a dependency. Any webpage that requires a logged in user will depend on this
 # function to authenticate the current user based on the JWT thats alive

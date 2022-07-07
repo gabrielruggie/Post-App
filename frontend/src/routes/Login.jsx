@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ErrorList from '../components/ErrorList'
+import { UserContext } from '../context/TokenContext'
 
 
 export default function Login() {
@@ -9,22 +10,26 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([])
   const [isDisabled, setIsDisabled] = useState(false);
+  const [token, setToken] = useContext(UserContext);
 
   const nav = useNavigate();
   async function handleSubmission(event){
     event.preventDefault();
 
     setIsDisabled(true);
-    await axios.post('http://localhost:8000/login', {
-      'username': username,
-      'password': password
-    }).then(
+    await axios.post('http://localhost:8000/login/token', JSON.stringify(
+      `grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`
+    )).then(
       result => {   
-        if (result.data["result"] === "User Verified"){
-          nav(result.data["redirect"]);
+        // if (result.data){
+        //   console.log
+        //   nav("/dashboard");
+        // }
+        // setIsDisabled(false);
+        // setErrors(Object.values(result.data));
+        if (result.ok){
+          setToken(result.data["access_token"])
         }
-        setIsDisabled(false);
-        setErrors(Object.values(result.data));
 
       }
     )

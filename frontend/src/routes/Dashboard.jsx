@@ -1,18 +1,27 @@
-import React, {useEffect} from 'react';
+import axios from 'axios';
+import React, { useEffect, useContext } from 'react';
 import { Link } from "react-router-dom";
+import { UserContext } from '../context/TokenContext';
 
 // Authentication should be good because we will need to use a get method to retrieve posts and thats where we will
 // catch any unchecked users
 // Should be the same for the other links here as well
 export default function Dashboard() {
-
+    const [token] = useContext(UserContext);
     // This is how you change the background color from page to page
     // Will need to add to every element since it makes change permanent
-    // useEffect(
-    //     () => {
-    //         document.querySelector('body').style.backgroundColor = "#022873";
-    //     }
-    // )
+    useEffect(
+        () => {
+            axios({
+                method: "GET",
+                url: "http://localhost:8000/dashboard",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token
+                  }
+            })
+        }
+    )
 
   return (
     <div className='grid grid-flow-col gap-4 m-4'>

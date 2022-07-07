@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, responses, status 
 from database.mysql_connectors import MySQLConnectors
 from schemas.post_schemas import Post, DatabasePost
-from schemas.user_schema import UserPayload
+from schemas.user_schema import UserPayload, User
 from routes.security_routes import get_user_from_token
 import json
 
@@ -9,9 +9,9 @@ import json
 dashboard = APIRouter()
 
 @dashboard.get("/")
-async def load_all_posts (user: UserPayload = Depends(get_user_from_token)):
+async def load_all_posts (user: User = Depends(get_user_from_token)):
     # Return json object to frontend
-    return json.dumps(MySQLConnectors.retrieve_all_posts())
+    return user# json.dumps(MySQLConnectors.retrieve_all_posts())
 
 @dashboard.get("/post/{id}")
 async def get_post (id: str, user: UserPayload = Depends(get_user_from_token) ):
