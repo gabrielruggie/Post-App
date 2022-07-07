@@ -21,7 +21,7 @@ async def user_login (user: User):
             return responses.JSONResponse(verification_payload)
 
         # Redirect to homepage for now
-        response = responses.JSONResponse(verification_payload)
+        response = responses.RedirectResponse(url="/dashboard", status_code=status.HTTP_302_FOUND)
 
         token = create_token_off_login(response=response, user_data=user_found)
         print(token)

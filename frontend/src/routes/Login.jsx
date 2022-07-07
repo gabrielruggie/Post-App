@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ErrorList from '../components/ErrorList'
-
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -15,14 +14,16 @@ export default function Login() {
     event.preventDefault();
 
     setIsDisabled(true);
-    await axios.post('http://localhost:8000/login', {
-      'username': username,
-      'password': password
-    }).then(
+    await axios.post('http://localhost:8000/login/token', JSON.stringify(
+      `grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`
+    )).then(
       result => {   
-        if (result.data["result"] === "User Verified"){
-          nav(result.data["redirect"]);
+        if (result.data){
+          console.log(result.data["access_token"])
+          localStorage.setItem("token", result.data["access_token"])
+          nav("/dashboard");
         }
+
         setIsDisabled(false);
         setErrors(Object.values(result.data));
 
