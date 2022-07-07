@@ -1,5 +1,6 @@
 from security.password_hasher import PasswordHasher as PH
 from fastapi import HTTPException, status
+from database.mysql_connectors import MySQLConnectors
 from schemas.user_schema import FormUser
 import re
 
@@ -33,6 +34,12 @@ class UserVerification:
     @classmethod
     def check_user_registration_input (cls, user: FormUser):
         errors = []
+
+        user = MySQLConnectors.retrieve_from_user_table(user.username)
+
+        if not user == None:
+            errors.append({"INVALID USERNAME":"Username has already been taken"})
+
         if not len(user.username) >= 5:
             errors.append({"INVALID USERNAME":"Username Must Be At Least 8 Characters"})
         
