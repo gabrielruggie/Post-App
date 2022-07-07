@@ -1,26 +1,39 @@
 import axios from 'axios';
-import React, { useEffect, useContext } from 'react';
-import { Link } from "react-router-dom";
-import { UserContext } from '../context/TokenContext';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
 // Authentication should be good because we will need to use a get method to retrieve posts and thats where we will
 // catch any unchecked users
 // Should be the same for the other links here as well
 export default function Dashboard() {
-    const [token] = useContext(UserContext);
-    // This is how you change the background color from page to page
-    // Will need to add to every element since it makes change permanent
-    useEffect(
-        () => {
+    const [firstname, setFirstname] = useState("");
+    const nav = useNavigate();
+    // This is the methodology to retrieve jwt token from backend and navigate user to login page if their session has expired
+    // May need to change navigation menu for future paths, could be that we backtrack our users through pages that require 
+    // authentication until we reach the log in page. However, this is not ideal
+    useEffect(()=>{
+        const onLoad = async() => {
+            //event.preventDefault();
             axios({
                 method: "GET",
                 url: "http://localhost:8000/dashboard",
                 headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token
-                  }
-            })
+                    Authorization: "Bearer "+localStorage.getItem("token")
+                }
+            }).then(result => {
+                setFirstname(result.data["firstname"]);
+                console.log(result.data["firstname"]); 
+            }).catch(
+                () => {
+                    // Write script to clear local storage here, more specifically, the 'token' field
+                    nav("/login", {replace: true})
+                }
+            )
+
         }
+        onLoad()
+    },[]
+        
     )
 
   return (
@@ -29,7 +42,7 @@ export default function Dashboard() {
             <div 
             className='text-blue-900 font-mono font-bold text-4xl p-10 rounded-md bg-yellow-500'
             >
-                Welcome back, John
+                Welcome back, {firstname}
             </div>
 
             <div

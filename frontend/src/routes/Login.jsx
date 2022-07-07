@@ -2,15 +2,12 @@ import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ErrorList from '../components/ErrorList'
-import { UserContext } from '../context/TokenContext'
-
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([])
   const [isDisabled, setIsDisabled] = useState(false);
-  const [token, setToken] = useContext(UserContext);
 
   const nav = useNavigate();
   async function handleSubmission(event){
@@ -21,15 +18,14 @@ export default function Login() {
       `grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`
     )).then(
       result => {   
-        // if (result.data){
-        //   console.log
-        //   nav("/dashboard");
-        // }
-        // setIsDisabled(false);
-        // setErrors(Object.values(result.data));
-        if (result.ok){
-          setToken(result.data["access_token"])
+        if (result.data){
+          console.log(result.data["access_token"])
+          localStorage.setItem("token", result.data["access_token"])
+          nav("/dashboard");
         }
+
+        setIsDisabled(false);
+        setErrors(Object.values(result.data));
 
       }
     )
