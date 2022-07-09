@@ -36,6 +36,12 @@ export default function Dashboard() {
         
     )
 
+    useEffect(
+        () => {
+            document.querySelector('body').style.backgroundColor = "#0762B2";
+        }
+      )
+
   return (
     <div className='grid grid-flow-col gap-4 m-4'>
         <div className='row-span-5 space-y-5'>

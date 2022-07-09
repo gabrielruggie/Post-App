@@ -4,22 +4,22 @@ import { Link } from "react-router-dom";
 // If you want to change the background color maybe write a function that will change it in App.css
 export default function About() {
 
-  // useEffect(
-  //       () => {
-  //           document.querySelector('body').style.backgroundColor = "#F2AB39";
-  //       }
-  //   )
+  useEffect(
+        () => {
+            document.querySelector('body').style.backgroundColor = "#F8F0E3";
+        }
+    )
 
   return (
-    <div className="grid grid-cols-1 gap-3 m-5">
+    <div className="grid grid-cols-1 gap-3 ml-24 mr-24 mt-5 mb-5">
       <div 
-      className='text-center font-mono font-bold text-6xl text-blue-900 bg-yellow-500 rounded-md p-7'
+      className='text-center font-mono font-bold text-6xl text-slate-800 rounded-md p-7'
       >
         POST APP
       </div>
       
       <div
-       className='text-center font-mono font-bold text-3xl text-blue-900 bg-yellow-500 rounded-md p-7 space-x-32'
+       className='text-center font-mono font-bold text-3xl text-white bg-slate-800 rounded-md p-7 space-x-32'
       >
         <span><Link to="/">Home Page</Link></span>
         <span><Link to="/register">Register Today</Link></span>
@@ -27,7 +27,7 @@ export default function About() {
       </div>
       
       <div
-      className='text-center font-mono font-bold p-10 bg-yellow-500 rounded-md text-blue-900 space-y-10'
+      className='text-center font-mono font-bold p-10 rounded-md text-white bg-slate-800 space-y-10'
       >
         <span className='text-4xl'>So... What is it?</span>
         <p className='text-left text-xl ml-10 mr-10'>Post App is a user-based social media app that encourages all users to 
@@ -55,12 +55,12 @@ export default function About() {
       </div>
 
       <div
-      className='text-center font-mono font-bold p-10 bg-yellow-500 rounded-md text-blue-900'
+      className='text-center font-mono font-bold p-10 rounded-md text-white bg-slate-800'
       >
         Newest Updates
       </div>
       <div
-      className='text-center first font-mono font-bold p-10 bg-slate-800 rounded-md text-yellow-300'
+      className='text-center first font-mono font-bold p-10 rounded-md text-slate-800'
       >
         Footer
       </div>

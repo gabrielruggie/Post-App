@@ -1,7 +1,14 @@
 import './App.css';
+import React, {useEffect} from 'react'
 import { Link } from "react-router-dom";
 
 function App() {
+
+  useEffect(
+    () => {
+        document.querySelector('body').style.backgroundColor = "#0762B2";
+    }
+  )
 
   return (
     <div className="App w-full">
