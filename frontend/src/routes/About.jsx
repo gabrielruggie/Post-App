@@ -38,8 +38,8 @@ export default function About() {
       </div>
 
       <div
-      className='font-mono font-bold p-10 ml-10 mr-10 bg-slate-800 rounded-md text-amber-400 space-y-6
-      hover:bg-slate-900'
+      className='font-mono font-bold p-10 ml-10 mr-10 bg-blue-400 rounded-md text-amber-400 space-y-6
+      hover:bg-blue-500'
       >
         <span className='text-4xl ml-10 mr-10'>Youth Ministry Basketball League Open Gym's Coming Soon</span>
         <p className='text-xl ml-10 mr-10'>Stay tuned and watch our website for updates. We are cooking up something big!</p>
@@ -47,8 +47,8 @@ export default function About() {
       </div>
 
       <div
-      className='font-mono font-bold p-10 ml-10 mr-10 bg-slate-800 rounded-md text-amber-400 space-y-6
-      hover:bg-slate-900'
+      className='font-mono font-bold p-10 ml-10 mr-10 bg-blue-400 rounded-md text-amber-400 space-y-6
+      hover:bg-blue-500'
       >
         <span className='text-4xl ml-10 mr-10'>How bout that uzi concert!?!</span>
         <div className='text-slate-200 italic ml-10'>by: userEFG, August 26th, 2021 @1:00pm</div>
