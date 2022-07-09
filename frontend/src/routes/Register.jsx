@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ErrorList from '../components/ErrorList'
@@ -12,6 +12,12 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([])
   const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(
+    () => {
+        document.querySelector('body').style.backgroundColor = "#0762B2";
+    }
+  )
 
   const nav = useNavigate();
   async function handleSubmission(event){

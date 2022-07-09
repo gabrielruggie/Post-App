@@ -9,12 +9,18 @@ import Util from '../Utilities/Utility';
 export default function Dashboard() {
     const [firstname, setFirstname] = useState("");
     const nav = useNavigate();
+
+    useEffect(
+        () => {
+            document.querySelector('body').style.backgroundColor = "#0762B2";
+        }
+    )
+
     // This is the methodology to retrieve jwt token from backend and navigate user to login page if their session has expired
     // May need to change navigation menu for future paths, could be that we backtrack our users through pages that require 
     // authentication until we reach the log in page. However, this is not ideal
     useEffect(()=>{
         const onLoad = async() => {
-            //event.preventDefault();
             axios({
                 method: "GET",
                 url: "http://localhost:8000/dashboard",
@@ -29,7 +35,6 @@ export default function Dashboard() {
                     nav("/login", {replace: true})
                 }
             )
-
         }
         onLoad()
     },[]
