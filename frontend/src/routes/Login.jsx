@@ -19,7 +19,6 @@ export default function Login() {
     )).then(
       result => {   
         if (result.data){
-          console.log(result.data["access_token"])
           localStorage.setItem("token", result.data["access_token"])
           nav("/dashboard");
         }

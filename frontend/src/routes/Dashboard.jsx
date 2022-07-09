@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import Util from '../Utilities/Utility';
 
 // Authentication should be good because we will need to use a get method to retrieve posts and thats where we will
 // catch any unchecked users
@@ -22,10 +23,9 @@ export default function Dashboard() {
                 }
             }).then(result => {
                 setFirstname(result.data["firstname"]);
-                console.log(result.data["firstname"]); 
             }).catch(
                 () => {
-                    // Write script to clear local storage here, more specifically, the 'token' field
+                    Util.clearLocalStorage("token")
                     nav("/login", {replace: true})
                 }
             )

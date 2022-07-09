@@ -12,7 +12,7 @@ class SystemSettings:
     MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
     MYSQL_HOST : str = os.getenv('MYSQL_HOST',default="localhost")
     MYSQL_DATABASE : str = os.getenv('MYSQL_DATABASE')
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 1
     SECRET_KEY: str = os.getenv('SECRET_KEY')
     ALGORITHM: str = os.getenv('ALGORITHM')
 
