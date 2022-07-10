@@ -121,6 +121,8 @@ class MySQLConnectors:
             cursor.execute(select_query, (id,))
             resource = cursor.fetchall()
 
+            # May change this when we are retrieving user specific posts
+            # I don't think we will need the id here
             post = {}
             for column in resource:
                 content = {

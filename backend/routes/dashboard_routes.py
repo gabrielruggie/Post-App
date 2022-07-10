@@ -1,3 +1,4 @@
+import uuid
 from fastapi import APIRouter, Depends, responses, status 
 from database.mysql_connectors import MySQLConnectors
 from schemas.post_schemas import Post, DatabasePost
@@ -11,6 +12,7 @@ dashboard = APIRouter()
 @dashboard.get("/")
 async def load_all_posts (user: UserPayload = Depends(get_user_from_token)):
     # Return json object to frontend
+    # Apped user payload to end of this v json object
     return user # json.dumps(MySQLConnectors.retrieve_all_posts())
 
 @dashboard.get("/post/{id}")
@@ -20,7 +22,7 @@ async def get_post (id: str, user: UserPayload = Depends(get_user_from_token) ):
 @dashboard.post("/create-post")
 async def create_post (post: Post, user: UserPayload = Depends(get_user_from_token)):
     full_post = DatabasePost(
-        id=post.id,
+        id=str(uuid.uuid4()),
         title=post.title,
         message=post.message,
         date_posted=post.date_posted,
@@ -31,6 +33,7 @@ async def create_post (post: Post, user: UserPayload = Depends(get_user_from_tok
     MySQLConnectors.send_post_to_posttable(full_post)
 
     try:
-        return responses.RedirectResponse("/dashboard", status_code=status.HTTP_302_FOUND)
+        # Lets frontend know that the post was created successfully
+        return responses.JSONResponse({"response":200, "redirect":"/dashboard"})
     except Exception as e:
         print(e)
