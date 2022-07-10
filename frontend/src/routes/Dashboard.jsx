@@ -2,12 +2,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Util from '../Utilities/Utility';
+import PostList from '../components/PostList';
+import Post from '../components/Post';
 
 // Authentication should be good because we will need to use a get method to retrieve posts and thats where we will
 // catch any unchecked users
 // Should be the same for the other links here as well
 export default function Dashboard() {
     const [firstname, setFirstname] = useState("");
+    const [postObjects, setPostObjects] = useState([]);
     const nav = useNavigate();
 
     useEffect(
@@ -27,8 +30,17 @@ export default function Dashboard() {
                 headers: {
                     Authorization: "Bearer "+localStorage.getItem("token")
                 }
-            }).then(result => {
+            }).then(
+                result => {
                 setFirstname(result.data["firstname"]);
+                
+                const onlyPosts = Object.values(result.data);
+                // remove user data from object
+                onlyPosts.splice(-3);
+                console.log(onlyPosts);
+
+                setPostObjects(onlyPosts);
+
             }).catch(
                 () => {
                     Util.clearTokenFromLocalStorage();
@@ -85,42 +97,7 @@ export default function Dashboard() {
             Post App
         </div>
         <div className='row-span-2 text-yellow-500 col-span-10 space-y-5'>
-            <div 
-            className='font-mono font-bold text-xl text-amber-400 bg-slate-800 w-full p-10  rounded-md space-y-6
-            hover:bg-slate-900'
-            >
-                <span className='text-4xl ml-10 mr-10'>Youth Ministry Basketball League Open Gym's Coming Soon</span>
-                <p className='text-xl ml-10 mr-10'>Stay tuned and watch our website for updates. 
-                We are cooking up something big!</p>
-                <div className='text-slate-200 italic ml-10'>by: user123, March 13th, 2022 @11:00pm</div>
-            </div>
-            <div 
-            className='font-mono font-bold text-xl text-amber-400 bg-slate-800 w-full p-10  rounded-md space-y-6
-            hover:bg-slate-900'
-            >
-                <span className='text-4xl ml-10 mr-10'>Youth Ministry Basketball League Open Gym's Coming Soon</span>
-                <p className='text-xl ml-10 mr-10'>Stay tuned and watch our website for updates. 
-                We are cooking up something big!</p>
-                <div className='text-slate-200 italic ml-10'>by: user123, March 13th, 2022 @11:00pm</div>
-            </div>
-            <div 
-            className='font-mono font-bold text-xl text-amber-400 bg-slate-800 w-full p-10  rounded-md space-y-6
-            hover:bg-slate-900'
-            >
-                <span className='text-4xl ml-10 mr-10'>Youth Ministry Basketball League Open Gym's Coming Soon</span>
-                <p className='text-xl ml-10 mr-10'>Stay tuned and watch our website for updates. 
-                We are cooking up something big!</p>
-                <div className='text-slate-200 italic ml-10'>by: user123, March 13th, 2022 @11:00pm</div>
-            </div>
-            <div 
-            className='font-mono font-bold text-xl text-amber-400 bg-slate-800 w-full p-10  rounded-md space-y-6
-            hover:bg-slate-900'
-            >
-                <span className='text-4xl ml-10 mr-10'>Youth Ministry Basketball League Open Gym's Coming Soon</span>
-                <p className='text-xl ml-10 mr-10'>Stay tuned and watch our website for updates. 
-                We are cooking up something big!</p>
-                <div className='text-slate-200 italic ml-10'>by: user123, March 13th, 2022 @11:00pm</div>
-            </div>
+            <PostList posts={postObjects}/>
         </div>
         
     </div>
