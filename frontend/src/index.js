@@ -7,6 +7,7 @@ import Login from './routes/Login';
 import Register from './routes/Register';
 import About from './routes/About';
 import Dashboard from './routes/Dashboard';
+import CreatePost from './routes/dashboard_routes/CreatePost';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
       <Route path="register" element={<Register />}/>
       <Route path="about-us" element={<About />}/>
       <Route path="dashboard" element={<Dashboard />}/>
+      <Route path="dashboard/create-post" element={<CreatePost />}/>
     </Routes>
   </BrowserRouter>
 );

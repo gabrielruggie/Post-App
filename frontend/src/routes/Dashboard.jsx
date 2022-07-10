@@ -31,14 +31,13 @@ export default function Dashboard() {
                 setFirstname(result.data["firstname"]);
             }).catch(
                 () => {
-                    Util.clearLocalStorage("token")
-                    nav("/login", {replace: true})
+                    Util.clearTokenFromLocalStorage();
+                    nav("/login", {replace: true});
                 }
-            )
-        }
-        onLoad()
-    },[]
-        
+                )
+            }
+            onLoad()
+        },[]
     )
 
     useEffect(
@@ -64,7 +63,7 @@ export default function Dashboard() {
                 <ul 
                 className='space-y-4 text-xl pb-10'
                 >
-                    <li className='hover:text-2xl'><Link to="/">Create Post</Link></li>
+                    <li className='hover:text-2xl'><Link to="/dashboard/create-post">Create Post</Link></li>
                     <li className='hover:text-2xl'><Link to="/">View Your Posts</Link></li>
                     <li className='hover:text-2xl'><Link to="/">View Archived Posts</Link></li>
                 </ul>

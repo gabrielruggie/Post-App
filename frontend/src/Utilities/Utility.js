@@ -1,8 +1,8 @@
 
 class Util {
 
-    static clearLocalStorage (key) {
-        localStorage.removeItem(key);
+    static clearTokenFromLocalStorage () {
+        localStorage.removeItem("token");
     }
 
 }
