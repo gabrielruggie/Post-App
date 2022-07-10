@@ -76,8 +76,8 @@ export default function Dashboard() {
                 className='space-y-4 text-xl pb-10'
                 >
                     <li className='hover:text-2xl'><Link to="/dashboard/create-post">Create Post</Link></li>
-                    <li className='hover:text-2xl'><Link to="/">View Your Posts</Link></li>
-                    <li className='hover:text-2xl'><Link to="/">View Archived Posts</Link></li>
+                    <li className='hover:text-2xl'><Link to="/dashboard/view-user-posts">View Your Posts</Link></li>
+                    <li className='hover:text-2xl'><Link to="/dashboard">View Archived Posts</Link></li>
                 </ul>
             </div>
 

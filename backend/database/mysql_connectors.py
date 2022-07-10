@@ -108,7 +108,7 @@ class MySQLConnectors:
                 connection.close()
     
     @staticmethod
-    def retrieve_post_by_id (id):
+    def retrieve_post_by_poster_id (id):
         try:
             # Sets up MySQL connector
             connection = mysql.connector.connect(host=settings.MYSQL_HOST, database=settings.MYSQL_DATABASE,
@@ -116,7 +116,7 @@ class MySQLConnectors:
 
             cursor = connection.cursor() 
             # MySQL selection query
-            select_query = """SELECT * FROM posttable WHERE id = %s"""
+            select_query = """SELECT * FROM posttable WHERE poster_id = %s"""
             # Has to be a tuple in order to query
             cursor.execute(select_query, (id,))
             resource = cursor.fetchall()

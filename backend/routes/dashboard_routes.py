@@ -14,13 +14,17 @@ async def load_all_posts (user: UserPayload = Depends(get_user_from_token)):
     database_posts = MySQLConnectors.retrieve_all_posts()
     database_posts.update(user.dict())
 
-    print(user.dict())
-    print(database_posts)
     return database_posts
 
-@dashboard.get("/post/{id}")
-async def get_post (id: str, user: UserPayload = Depends(get_user_from_token) ):
-    return json.dumps(MySQLConnectors.retrieve_post_by_id(id))
+# @dashboard.get("/post/{id}")
+# async def get_post (id: str, user: UserPayload = Depends(get_user_from_token) ):
+#     return json.dumps(MySQLConnectors.retrieve_post_by_id(id))
+
+@dashboard.get("/view-user-posts")
+async def load_user_posts (user: UserPayload = Depends(get_user_from_token)):
+    database_user_posts =  MySQLConnectors.retrieve_post_by_poster_id(user.id)
+
+    return database_user_posts
 
 @dashboard.post("/create-post")
 async def create_post (post: Post, user: UserPayload = Depends(get_user_from_token)):
