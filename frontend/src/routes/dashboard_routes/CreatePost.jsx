@@ -50,7 +50,7 @@ export default function CreatePost() {
 
   return (
     <div className='grid justify-center text-center my-36'>
-      <h1 className='text-7xl font-bold font-mono text-yellow-400 pb-10'>Sign In</h1>
+      <h1 className='text-7xl font-bold font-mono text-yellow-400 pb-10'>Post A Post to Post App</h1>
       
       <form className='my-10 space-y-12' onSubmit={handleSubmission}>
 
@@ -83,7 +83,7 @@ export default function CreatePost() {
 
         <div>
           <label className='font-mono text-2xl text-yellow-400 font-bold' htmlFor="date">
-            Enter Message
+            Enter Date
           </label>
           <input 
             type="text"
@@ -102,6 +102,8 @@ export default function CreatePost() {
       >
         Submit
       </button>
+
+      <div><Link className='font-mono text-2xl text-yellow-400 font-bold' to="/dashboard">Back to Your Dashboard</Link></div>
 
       </form>
     </div>

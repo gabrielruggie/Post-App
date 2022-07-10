@@ -11,9 +11,12 @@ dashboard = APIRouter()
 
 @dashboard.get("/")
 async def load_all_posts (user: UserPayload = Depends(get_user_from_token)):
-    # Return json object to frontend
-    # Apped user payload to end of this v json object
-    return user # json.dumps(MySQLConnectors.retrieve_all_posts())
+    database_posts = MySQLConnectors.retrieve_all_posts()
+    database_posts.update(user.dict())
+
+    print(user.dict())
+    print(database_posts)
+    return database_posts
 
 @dashboard.get("/post/{id}")
 async def get_post (id: str, user: UserPayload = Depends(get_user_from_token) ):

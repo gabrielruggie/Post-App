@@ -35,9 +35,9 @@ class UserVerification:
     def check_user_registration_input (cls, user: FormUser):
         errors = []
 
-        user = MySQLConnectors.retrieve_from_user_table(user.username)
+        user_found = MySQLConnectors.retrieve_from_user_table(user.username)
 
-        if not user == None:
+        if not user_found == None:
             errors.append({"INVALID USERNAME":"Username has already been taken"})
 
         if not len(user.username) >= 5:
