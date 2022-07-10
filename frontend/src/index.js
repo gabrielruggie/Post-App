@@ -8,6 +8,7 @@ import Register from './routes/Register';
 import About from './routes/About';
 import Dashboard from './routes/Dashboard';
 import CreatePost from './routes/dashboard_routes/CreatePost';
+import ViewPosts from './routes/dashboard_routes/ViewPosts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,7 @@ root.render(
       <Route path="about-us" element={<About />}/>
       <Route path="dashboard" element={<Dashboard />}/>
       <Route path="dashboard/create-post" element={<CreatePost />}/>
+      <Route path="dashboard/view-user-posts" element={<ViewPosts />}/>
     </Routes>
   </BrowserRouter>
 );
