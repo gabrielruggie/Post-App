@@ -3,7 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ErrorList from '../components/ErrorList'
 
-
+/**
+ * Renders user registration form
+ * Makes request to backend to create user in database
+ * If successful, will log user into their dashboard
+ * If unsuccessful, will display errors given by backend and allow user to fix issues
+ */
 export default function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

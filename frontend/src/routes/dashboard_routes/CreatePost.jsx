@@ -4,6 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Util from '../../Utilities/Utility';
 import ErrorList from '../../components/ErrorList';
 
+/**
+ * Renders the Create Post Form that takes in a title, message and date. Displays errors toward the top
+ * of the form if the title and/or date is missing
+ * Upon submittion, redirects user back to their dashboard
+ * If a user is not authenticated, they will get redirected to the homepage
+ */
 export default function CreatePost() {
     const [title, setTitle] = useState("");
     const [message, setMessage] = useState("");

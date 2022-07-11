@@ -6,6 +6,9 @@ from routes.security_routes import *
 
 login = APIRouter()
 
+'''
+Verifies user data with database and if successful, creates JWT token and sends frontend success response
+'''
 @login.post("/")
 async def user_login (user: User):
     

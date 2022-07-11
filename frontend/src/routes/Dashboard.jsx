@@ -4,7 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Util from '../Utilities/Utility';
 import PostList from '../components/PostList';
 
-
+/**
+ * Renders user specific dashboard that displays all posts made to post app
+ * If a user is not authenticated, they will get redirected to the homepage
+ */
 export default function Dashboard() {
     const [firstname, setFirstname] = useState("");
     const [postObjects, setPostObjects] = useState([]);

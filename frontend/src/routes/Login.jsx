@@ -3,6 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ErrorList from '../components/ErrorList'
 
+/**
+ * Renders user login form
+ * Makes request to backend to create user in database
+ * If successful, will log user into their dashboard
+ * If unsuccessful, will display errors given by backend and allow user to fix issues
+ */
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

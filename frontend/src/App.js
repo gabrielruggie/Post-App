@@ -2,6 +2,10 @@ import './App.css';
 import React, {useEffect} from 'react'
 import { Link } from "react-router-dom";
 
+/**
+ * Main page that firsts loads up. 
+ * Allows users to login, register or see the about-us page
+ * */
 function App() {
 
   useEffect(

@@ -8,6 +8,10 @@ from routes.security_routes import security
 
 origins =['http://localhost:3000']
 
+'''
+Creates FastAPI instance and mounts all routes to it
+Configures CORS middleware as well
+'''
 def setup ():
     app = FastAPI()
 
