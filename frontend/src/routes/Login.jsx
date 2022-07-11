@@ -30,7 +30,7 @@ export default function Login() {
       `grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`
     )).then(
       result => {   
-        if (result.data){
+        if (result.data["access_token"]){
           localStorage.setItem("token", result.data["access_token"])
           nav("/dashboard");
         }

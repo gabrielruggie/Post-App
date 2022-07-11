@@ -19,7 +19,7 @@ async def user_login (user: User):
     try:
         # Verifies that data matches data in database
         verification_payload = UV.verify_user_credentials(user_found, user.password)
-
+        print(verification_payload)
         if verification_payload["result"] == "Failed to Verify User":
             return responses.JSONResponse(verification_payload)
 
