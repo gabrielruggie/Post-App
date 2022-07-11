@@ -1,7 +1,6 @@
 import React, {useEffect}from 'react';
 import { Link } from "react-router-dom";
 
-// If you want to change the background color maybe write a function that will change it in App.css
 export default function About() {
 
   useEffect(

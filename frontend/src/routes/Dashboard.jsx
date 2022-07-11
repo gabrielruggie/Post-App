@@ -3,11 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Util from '../Utilities/Utility';
 import PostList from '../components/PostList';
-import Post from '../components/Post';
 
-// Authentication should be good because we will need to use a get method to retrieve posts and thats where we will
-// catch any unchecked users
-// Should be the same for the other links here as well
+
 export default function Dashboard() {
     const [firstname, setFirstname] = useState("");
     const [postObjects, setPostObjects] = useState([]);
@@ -19,9 +16,6 @@ export default function Dashboard() {
         }
     )
 
-    // This is the methodology to retrieve jwt token from backend and navigate user to login page if their session has expired
-    // May need to change navigation menu for future paths, could be that we backtrack our users through pages that require 
-    // authentication until we reach the log in page. However, this is not ideal
     useEffect(()=>{
         const onLoad = async() => {
             axios({

@@ -38,7 +38,6 @@ export default function Login() {
 
   }
 
-  // Add 3D text to registration
   return (
     <div className='grid justify-center text-center my-36'>
       <h1 className='text-7xl font-bold font-mono text-yellow-400 pb-10'>Sign In</h1>

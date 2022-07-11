@@ -3,7 +3,7 @@ from fastapi import APIRouter, Request, responses, status
 from schemas.user_schema import FormUser, DatabaseUser
 from security.password_hasher import PasswordHasher as PH
 from database.mysql_connectors import MySQLConnectors
-from security.user_verification import UserVerification, RegistrationError
+from security.user_verification import UserVerification
 
 register = APIRouter()
 
