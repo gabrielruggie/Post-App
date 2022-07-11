@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from datetime import date, datetime
 
 class Post(BaseModel):
     # Currently the thought process is to allow React to make uuid

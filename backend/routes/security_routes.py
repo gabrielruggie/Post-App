@@ -4,9 +4,8 @@ from fastapi import Depends, status, HTTPException, APIRouter, Response
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from datetime import timedelta
 from typing import Optional
-from schemas.user_schema import UserPayload, User
+from schemas.user_schema import UserPayload
 from database.settings import settings
-from schemas.security_schemas import OAuth2PasswordBearerWithCookie
 from database.mysql_connectors import MySQLConnectors
 
 security = APIRouter()
