@@ -36,6 +36,7 @@ export default function Register() {
           nav(result.data["redirect"]);
         }
         setIsDisabled(false);
+        
         setErrors(Object.values(result.data));
 
       }

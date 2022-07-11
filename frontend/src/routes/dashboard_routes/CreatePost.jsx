@@ -2,12 +2,14 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Util from '../../Utilities/Utility';
+import ErrorList from '../../components/ErrorList';
 
 export default function CreatePost() {
     const [title, setTitle] = useState("");
     const [message, setMessage] = useState("");
     const [date, setDate] = useState("");
     const [isDisabled, setIsDisabled] = useState("");
+    const [errors, setErrors] = useState([]);
 
     useEffect(
         () => {
@@ -37,11 +39,14 @@ export default function CreatePost() {
                     nav(result.data["redirect"])
                 }else{
                     setIsDisabled(false);
+                    const error = JSON.stringify(result.data["Error"])
+                    setErrors([error.substring(1, error.length-1)]);
                 }
 
             }
         ).catch(
-            () => {
+            error => {
+              console.log(error)
                 Util.clearTokenFromLocalStorage();
                 nav("/login", {replace: true});
             }
@@ -51,8 +56,10 @@ export default function CreatePost() {
   return (
     <div className='grid justify-center text-center my-36'>
       <h1 className='text-7xl font-bold font-mono text-yellow-400 pb-10'>Post A Post to Post App</h1>
-      
+
       <form className='my-10 space-y-12' onSubmit={handleSubmission}>
+
+      <ErrorList errors={errors} />
 
         <div>
           <label className='font-mono text-2xl text-yellow-400 font-bold' htmlFor="title">
