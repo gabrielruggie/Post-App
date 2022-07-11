@@ -7,6 +7,10 @@ from routes.security_routes import get_user_from_token
 
 dashboard = APIRouter()
 
+'''
+Makes connection to database in order to connect all posts to user dashboard
+Route checks user authentication before making such requests
+'''
 @dashboard.get("/")
 async def load_all_posts (user: UserPayload = Depends(get_user_from_token)):
     database_posts = MySQLConnectors.retrieve_all_posts()
@@ -14,11 +18,19 @@ async def load_all_posts (user: UserPayload = Depends(get_user_from_token)):
 
     return database_posts
 
+'''
+Makes connection to database in order to retrieve user specific posts
+Route checks user authentication before making such requests
+'''
 @dashboard.get("/view-user-posts")
 async def load_user_posts (user: UserPayload = Depends(get_user_from_token)):
     database_user_posts =  MySQLConnectors.retrieve_post_by_poster_id(user.id)
     return database_user_posts
 
+'''
+Send a post object to database
+Route checks user authentication before making such requests
+'''
 @dashboard.post("/create-post")
 async def create_post (post: Post, user: UserPayload = Depends(get_user_from_token)):
     

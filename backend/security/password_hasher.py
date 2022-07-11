@@ -1,6 +1,10 @@
 from inspect import stack
 from passlib.hash import sha256_crypt
 
+'''
+Encrpyts and verifies passwords
+Uses SHA256 algorithm
+'''
 class PasswordHasher:
 
     @staticmethod

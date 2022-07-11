@@ -4,10 +4,13 @@ from database.mysql_connectors import MySQLConnectors
 from schemas.user_schema import FormUser
 import re
 
+'''
+User verification class that verifies user registration and login form data
+'''
 class UserVerification:
-
+    # Regex for checking valid emails
     email_pattern = re.compile("\w+@[a-zA-Z]{0,6}\.[a-zA-Z]{0,4}")
-    # Password must contain 1 or more uppercase letters and 1 or more numbers
+    # Password must contain 1 or more uppercase letters OR 1 or more numbers
     password_pattern = re.compile(".*[A-Z0-9]+.*")
 
     # Receives user information from MySQL connectors and verifies information
@@ -31,6 +34,9 @@ class UserVerification:
             "redirect":"/dashboard"
             }
 
+    '''
+    Checks user registration form fields with regex previous defined and if the fields are empty or not
+    '''
     @classmethod
     def check_user_registration_input (cls, user: FormUser):
         errors = []
@@ -61,17 +67,16 @@ class UserVerification:
             "redirect":"/login"
             }
 
+    '''
+    Verifies email with regex
+    '''
     @classmethod
     def check_email (cls, initial_email):
         return cls.email_pattern.match(initial_email)
     
+    '''
+    Verifies password with regex
+    '''
     @classmethod
     def check_password (cls, initial_password):
         return cls.password_pattern.match(initial_password)
-
-    # For future task
-    # def does_username_exist ():
-    #     pass
-
-class RegistrationError (Exception):
-    pass

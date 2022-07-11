@@ -4,6 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Util from '../../Utilities/Utility';
 import PostList from '../../components/PostList'
 
+/**
+ * Renders view post page that renders all of a user's specific posts 
+ * If a user is not authenticated, they will get redirected to the homepage
+ */
 export default function ViewPosts() {
     const [postObjects, setPostObjects] = useState([]);
     const nav = useNavigate();

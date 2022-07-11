@@ -1,4 +1,6 @@
-
+/**
+ * Utility class that contains static helper methods
+ */
 class Util {
 
     static clearTokenFromLocalStorage () {

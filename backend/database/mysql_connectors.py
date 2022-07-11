@@ -5,6 +5,10 @@ from .settings import settings
 
 class MySQLConnectors:
 
+    '''
+    MySQL connector that sends user data to database. Expects user data in form or User Object Schema
+    previously defined
+    '''
     @staticmethod
     def send_to_user_table (user: DatabaseUser):
         try:
@@ -32,6 +36,10 @@ class MySQLConnectors:
                 cursor.close()
                 connection.close()
     
+    '''
+    Retrieves the specified user from the database if it exists. Post App only registers unique usernames. This helps 
+    retrieve data specifically for the user specified.
+    '''
     @staticmethod
     def retrieve_from_user_table (username: str):
         try:
@@ -71,6 +79,9 @@ class MySQLConnectors:
                 cursor.close()
                 connection.close()
 
+    '''
+    Retrieves all posts from the database to be displayed on the user dashboard
+    '''
     @staticmethod
     def retrieve_all_posts ():
         try:
@@ -107,6 +118,10 @@ class MySQLConnectors:
                 cursor.close()
                 connection.close()
     
+    '''
+    Retrieves a post based on the poster's id. This acts as a filter and only returns a list of Post objects 
+    that the poster made to the application
+    '''
     @staticmethod
     def retrieve_post_by_poster_id (id):
         try:
@@ -145,6 +160,10 @@ class MySQLConnectors:
                 cursor.close()
                 connection.close()
     
+    '''
+    Writes a Post to the post table in the database. Expects data in form of Post object schema previously
+    defined
+    '''
     @staticmethod
     def send_post_to_posttable (post: DatabasePost):
         try:

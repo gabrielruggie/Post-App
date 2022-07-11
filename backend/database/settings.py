@@ -6,7 +6,9 @@ from pathlib import Path
 dotenv_path = Path('security/.env')
 load_dotenv(dotenv_path=dotenv_path)
 
-
+'''
+Secret settings such as database configurations and JWT specific information
+'''
 class SystemSettings:
     MYSQL_USER : str = os.getenv('MYSQL_USER')
     MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')

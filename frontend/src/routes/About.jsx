@@ -1,6 +1,9 @@
 import React, {useEffect}from 'react';
 import { Link } from "react-router-dom";
 
+/**
+ * Renders the about page that describes Post App
+ */
 export default function About() {
 
   useEffect(

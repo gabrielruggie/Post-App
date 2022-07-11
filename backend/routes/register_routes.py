@@ -7,6 +7,10 @@ from security.user_verification import UserVerification
 
 register = APIRouter()
 
+'''
+Creates a new user in the database. First checks user input fields and if correct, sends
+frontend success response
+'''
 @register.post("/")
 async def regsiter_user (new_user: FormUser):
     

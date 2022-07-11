@@ -1,5 +1,8 @@
 import React from 'react'
 
+/**
+ * Post object that represents a user's post to Post App
+ */
 export default function Post({post}) {
   return (
     <div 
