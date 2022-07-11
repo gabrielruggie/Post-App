@@ -28,6 +28,10 @@ async def load_user_posts (user: UserPayload = Depends(get_user_from_token)):
 
 @dashboard.post("/create-post")
 async def create_post (post: Post, user: UserPayload = Depends(get_user_from_token)):
+    
+    if len(post.title) == 0 or len(post.date_posted) == 0:
+        return responses.JSONResponse({"response":500, "Error":"Either The Title Or Date Box Is Empty!"})
+
     full_post = DatabasePost(
         id=str(uuid.uuid4()),
         title=post.title,
